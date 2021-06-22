@@ -9,6 +9,7 @@ public class Rsi {
 		// TODO Auto-generated method stub
 		
 		float rsi;
+		int count = 20;
 		//임의의 가격 14개
 		int[] price = {10,11,8,5,14,15,16,15,14,15,16,18,22,24};
 		float upAverage = 0, downAverage = 0;
@@ -17,8 +18,9 @@ public class Rsi {
 		
 		int variable;
 
-		for (int i = 0; i < price.length - 1; i++) {
+		for (int i = 0; i < count; i++) {
 			variable = price[i + 1] - price[i];
+			variable *= count-i;
 			if (variable > 0)
 				up.add(variable);
 			else
@@ -42,16 +44,6 @@ public class Rsi {
 		
 		rsi = upAverage/(upAverage+downAverage)*100;
 		System.out.println("rsi="+rsi);
-		
-		
-
-//		float rsi = 81.3f;
-//		if (rsi > 70)
-//			System.out.println("과매수");
-//		else if (rsi < 30)
-//			System.out.println("과매도");
-//		else
-//			System.out.println("중간");
 	}
 
 }
