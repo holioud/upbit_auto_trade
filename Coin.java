@@ -12,6 +12,7 @@ public class Coin {
 	float rsi;
 	int count;
 
+	float recentPrice;
 	float[] price;
 	String marketCode;
 
@@ -20,9 +21,17 @@ public class Coin {
 		this.marketCode = marketCode;
 		this.count = count;
 		setPrice();
-		setRsi();
-		//setBollingerValue();
+		setRsi(0);
+		setBollingerValue();
 
+	}
+	
+	public float getRecentPrice() {
+		return recentPrice;
+	}
+
+	public void setRecentPrice() {
+		this.recentPrice = price[0];
 	}
 	
 	public int getCount() {
@@ -67,7 +76,8 @@ public class Coin {
 		return rsi;
 	}
 
-	public void setRsi() {
+	public void setRsi(float rsi) {
+		rsi = 0;
 		float sum = 0f;
 		float upAverage = 0, downAverage = 0;
 		List<Float> up = new ArrayList<Float>();
@@ -94,8 +104,9 @@ public class Coin {
 			downAverage += down.get(i);
 		}
 		downAverage = -downAverage/sum;
-		
-		rsi = (int) upAverage/(upAverage+downAverage)*100;
+		rsi = upAverage/(upAverage+downAverage);
+		rsi = rsi * 100;
+		this.rsi = rsi;
 	}
 
 	public float[] getPrice() {
